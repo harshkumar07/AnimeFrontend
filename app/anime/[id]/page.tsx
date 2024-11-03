@@ -125,85 +125,99 @@ const AnimeDetail: React.FC<{ params: { id: string } }> = ({ params }) => {
 
   return (
     <div className="p-5 font-sans bg-white text-black dark:bg-black dark:text-white mt-16">
-      {loading && <p className="w-full text-center h-5">Loading</p>}
-      {error && <p className="w-full text-center text-red-500">Error: {error}</p>}
-      {animeInfo && (
-        <div className="max-w-3xl mx-auto">
-          {/* Anime Title Section */}
-          <h1 className="text-4xl font-bold mb-4 text-left">{animeInfo.title}</h1>
-
-          {/* Video Player Section */}
-          {selectedVideoUrl && (
-            <div className="mb-5">
-              <video ref={videoRef} controls autoPlay className="rounded-lg w-full">
-                Your browser does not support the video tag.
-              </video>
-              {/* Quality Options Section */}
-              <div className="flex justify-end mb-5 mt-5">
-                {videoSources.map((source, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setSelectedVideoUrl(source.url)}
-                    className={`mx-1 py-1 px-3 rounded-lg transition duration-300 ${
-                      selectedVideoUrl === source.url
-                        ? "bg-blue-600 text-white hover:bg-blue-700"
-                        : "bg-gray-200 dark:bg-gray-700 hover:bg-gray-300"
-                    }`}
-                  >
-                    {source.quality}
-                  </button>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* Episodes Section */}
-          <h2 className="mt-5 text-2xl font-semibold mb-3">Episodes</h2>
-          <div className="flex flex-wrap justify-center gap-3 mb-5">
-            {animeInfo.episodes.map((episode) => (
-              <button
-                key={episode.id}
-                onClick={() => handlePlayVideo(episode.id)}
-                className={`flex items-center justify-center h-10 w-24 dark:text-white text-black rounded-lg shadow-md transition duration-300 ${
-                  selectedEpisode === episode.id
-                    ? "bg-blue-600 text-white hover:bg-blue-700"
-                    : "bg-gray-200 dark:bg-gray-700 hover:bg-gray-300"
-                }`}
-              >
-                Episode {episode.number}
-              </button>
-            ))}
-          </div>
-
-          {/* Description Section */}
-          <div className="mt-5 flex flex-col md:flex-row">
-            <div className="w-full md:w-3/4 pr-4">
-              <h2 className="text-3xl font-bold mb-2">{animeInfo.title}</h2>
-              <h2 className="text-lg font-semibold">Description:</h2>
-              <p>{animeInfo.description}</p>
-            </div>
-            <div className="w-full md:w-1/4 flex justify-center items-center mt-4 md:mt-0">
-              <Image
-                src={animeInfo.image}
-                alt={animeInfo.title}
-                className="rounded-lg max-w-full h-auto"
-                width={300} // Adjust the width according to your layout
-                height={400} // Adjust the height according to your layout
-              />
+    {loading && <p className="w-full text-center h-5 text-sm sm:text-base">Loading</p>}
+    {error && <p className="w-full text-center text-red-500 text-sm sm:text-base">Error: {error}</p>}
+    {animeInfo && (
+      <div className="max-w-3xl mx-auto">
+        {/* Anime Title Section */}
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 text-left">
+          {animeInfo.title}
+        </h1>
+  
+        {/* Video Player Section */}
+        {selectedVideoUrl && (
+          <div className="mb-5">
+            <video
+              ref={videoRef}
+              controls
+              autoPlay
+              className="rounded-lg w-full"
+            >
+              Your browser does not support the video tag.
+            </video>
+  
+            {/* Quality Options Section */}
+            <div className="flex justify-end mb-5 mt-5">
+              {videoSources.map((source, index) => (
+                <button
+                  key={index}
+                  onClick={() => setSelectedVideoUrl(source.url)}
+                  className={`mx-1 py-1 px-3 text-xs sm:text-sm md:text-base rounded-lg transition duration-300 ${
+                    selectedVideoUrl === source.url
+                      ? "bg-blue-600 text-white hover:bg-blue-700"
+                      : "bg-gray-200 dark:bg-gray-700 hover:bg-gray-300"
+                  }`}
+                >
+                  {source.quality}
+                </button>
+              ))}
             </div>
           </div>
-
-          {/* Details Section */}
-          <div className="mt-5 bg-gray-100 p-4 rounded-lg dark:bg-gray-800">
-            <p><strong>Other Name:</strong> {animeInfo.otherName || "N/A"}</p>
-            <p><strong>Release Date:</strong> {animeInfo.releaseDate || "N/A"}</p>
-            <p><strong>Status:</strong> {animeInfo.status}</p>
-            <p><strong>Genres:</strong> {animeInfo.genres.join(", ")}</p>
-            <p><strong>Total Episodes:</strong> {animeInfo.totalEpisodes}</p>
+        )}
+  
+        {/* Episodes Section */}
+        <h2 className="mt-5 text-xl sm:text-2xl font-semibold mb-3">
+          Episodes
+        </h2>
+        <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-5">
+          {animeInfo.episodes.map((episode) => (
+            <button
+              key={episode.id}
+              onClick={() => handlePlayVideo(episode.id)}
+              className={`flex items-center justify-center h-8 sm:h-10 w-20 sm:w-24 text-xs sm:text-sm md:text-base dark:text-white text-black rounded-lg shadow-md transition duration-300 ${
+                selectedEpisode === episode.id
+                  ? "bg-blue-600 text-white hover:bg-blue-700"
+                  : "bg-gray-200 dark:bg-gray-700 hover:bg-gray-300"
+              }`}
+            >
+              Ep {episode.number}
+            </button>
+          ))}
+        </div>
+  
+        {/* Description Section */}
+        <div className="mt-5 flex flex-col md:flex-row">
+          <div className="w-full md:w-3/4 pr-4">
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-2">
+              {animeInfo.title}
+            </h2>
+            <h2 className="text-lg font-semibold">Description:</h2>
+            <p className="text-sm sm:text-base md:text-lg">{animeInfo.description}</p>
+          </div>
+          <div className="w-full md:w-1/4 flex justify-center items-center mt-4 md:mt-0">
+            <Image
+              src={animeInfo.image}
+              alt={animeInfo.title}
+              className="rounded-lg max-w-full h-auto"
+              width={300}
+              height={400}
+            />
           </div>
         </div>
-      )}
-    </div>
+  
+        {/* Details Section */}
+        <div className="mt-5 bg-gray-100 p-4 rounded-lg dark:bg-gray-800 text-sm sm:text-base md:text-lg">
+          <p><strong>Other Name:</strong> {animeInfo.otherName || "N/A"}</p>
+          <p><strong>Release Date:</strong> {animeInfo.releaseDate || "N/A"}</p>
+          <p><strong>Status:</strong> {animeInfo.status}</p>
+          <p><strong>Genres:</strong> {animeInfo.genres.join(", ")}</p>
+          <p><strong>Total Episodes:</strong> {animeInfo.totalEpisodes}</p>
+        </div>
+      </div>
+    )}
+  </div>
+  
+  
   );
 };
 
