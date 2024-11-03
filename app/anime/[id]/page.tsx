@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import Hls from "hls.js";
+import Image from "next/image"; // Import Image from next/image
 
 interface VideoSource {
   url: string;
@@ -65,8 +66,12 @@ const AnimeDetail: React.FC<{ params: { id: string } }> = ({ params }) => {
         fetchEpisodeSources(data.episodes[0].id); // Fetch sources for the first episode
         setSelectedEpisode(data.episodes[0].id); // Set the first episode as selected
       }
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err: unknown) {
+      if (axios.isAxiosError(err)) {
+        setError(err.message);
+      } else {
+        setError("An unknown error occurred.");
+      }
     } finally {
       setLoading(false);
     }
@@ -85,8 +90,8 @@ const AnimeDetail: React.FC<{ params: { id: string } }> = ({ params }) => {
       if (filteredSources.length > 0) {
         setSelectedVideoUrl(filteredSources[0].url);
       }
-    } catch (err: any) {
-      console.error("Error fetching video sources:", err.message);
+    } catch (err: unknown) {
+      console.error("Error fetching video sources:", err instanceof Error ? err.message : "Unknown error");
     }
   };
 
@@ -134,26 +139,21 @@ const AnimeDetail: React.FC<{ params: { id: string } }> = ({ params }) => {
                 Your browser does not support the video tag.
               </video>
               {/* Quality Options Section */}
-            
-                <div className="flex justify-end mb-5 mt-5">
+              <div className="flex justify-end mb-5 mt-5">
                 {videoSources.map((source, index) => (
-                    <button
+                  <button
                     key={index}
-                    onClick={() => {
-                        setSelectedVideoUrl(source.url);
-                        // Reset button colors here if needed
-                    }}
+                    onClick={() => setSelectedVideoUrl(source.url)}
                     className={`mx-1 py-1 px-3 rounded-lg transition duration-300 ${
-                        selectedVideoUrl === source.url
+                      selectedVideoUrl === source.url
                         ? "bg-blue-600 text-white hover:bg-blue-700"
-                        : "bg-gray-200  dark:bg-gray-700 hover:bg-gray-300"
+                        : "bg-gray-200 dark:bg-gray-700 hover:bg-gray-300"
                     }`}
-                    >
+                  >
                     {source.quality}
-                    </button>
+                  </button>
                 ))}
-                </div>
-
+              </div>
             </div>
           )}
 
@@ -183,7 +183,13 @@ const AnimeDetail: React.FC<{ params: { id: string } }> = ({ params }) => {
               <p>{animeInfo.description}</p>
             </div>
             <div className="w-full md:w-1/4 flex justify-center items-center mt-4 md:mt-0">
-              <img src={animeInfo.image} alt={animeInfo.title} className="rounded-lg max-w-full h-auto" />
+              <Image
+                src={animeInfo.image}
+                alt={animeInfo.title}
+                className="rounded-lg max-w-full h-auto"
+                width={300} // Adjust the width according to your layout
+                height={400} // Adjust the height according to your layout
+              />
             </div>
           </div>
 
