@@ -75,11 +75,7 @@ const AnimeDetail: React.FC<{ params: { id: string } }> = ({ params }) => {
   const fetchEpisodeSources = async (episodeId: string) => {
     const url = getEpisodeLink(cleanString(episodeId));
     try {
-      const { data } = await axios.get(url, {
-        headers: {
-          Referer: "https://s3taku.com",
-        },
-      });
+      const { data } = await axios.get(url);
       const filteredSources = data.sources.filter(
         (source: VideoSource) =>
           source.quality !== "default" && source.quality !== "backup"
