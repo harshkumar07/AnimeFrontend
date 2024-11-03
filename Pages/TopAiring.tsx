@@ -1,12 +1,11 @@
 'use client';
-
 import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import Link from "next/link";
 import { Skeleton } from "@/components/ui/skeleton";
 
 interface Anime {
-  id: string;
+  id: string; // Make sure to include 'id' since you're using it for the key
   title: string;
   image: string;
   url: string;
@@ -51,7 +50,6 @@ const TopAiring: React.FC = () => {
   return (
     <div className="my-4 mt-20 text-white">
       <h1 className="text-3xl font-bold mb-4 text-left text-blue-600 ml-12 mt-6">Top Airing Anime</h1>
-
       {loading && (
         <div className="flex justify-center w-full p-4">
           <div className="grid gap-8 w-full sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
@@ -68,7 +66,6 @@ const TopAiring: React.FC = () => {
           </div>
         </div>
       )}
-
       {!loading && animeList.length > 0 && (
         <div className="relative">
           <button
@@ -77,10 +74,13 @@ const TopAiring: React.FC = () => {
           >
             <span className="text-xl">&lt;</span>
           </button>
-          <div className="overflow-hidden whitespace-nowrap" ref={scrollRef}>
+          <div
+            className="overflow-hidden whitespace-nowrap"
+            ref={scrollRef}
+          >
             <div className="flex space-x-4 p-4">
               {animeList.map((anime) => (
-                <div key={anime.id} className="flex-shrink-0 w-48 relative rounded-lg overflow-hidden shadow bg-gray-100 dark:bg-gray-800">
+                <div key={anime.id} className="flex-shrink-0 w-48 h-80 relative rounded-lg overflow-hidden shadow-lg bg-gray-100 dark:bg-gray-800">
                   <Link href={`/anime/${anime.id}`}>
                     <img
                       src={anime.image}
@@ -88,9 +88,9 @@ const TopAiring: React.FC = () => {
                       className="w-full h-64 object-cover rounded-t-lg"
                       loading="lazy"
                     />
-                    <div className="p-4">
+                    <div className="p-4 h-16">
                       <p className="text-black dark:text-white text-md font-semibold truncate">{anime.title}</p>
-                      <p className="text-black dark:text-gray-400 text-sm">{anime.genres.join(', ')}</p>
+                      <p className="text-black dark:text-gray-400 text-sm truncate">{anime.genres.join(', ')}</p>
                     </div>
                   </Link>
                 </div>
