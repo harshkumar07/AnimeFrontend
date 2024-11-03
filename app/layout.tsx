@@ -1,5 +1,4 @@
-// app/layout.tsx or RootLayout.tsx
-import { ThemeProvider } from "@/components/theme-provider"
+import { ThemeProvider } from "@/components/theme-provider";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { Roboto } from '@next/font/google'; // Import Google Font
@@ -37,18 +36,18 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-        <head />
-        <body>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <Navbar/>
-            {children}
-          </ThemeProvider>
-        </body>
-      </html>
+      <head />
+      <body className={`${geistSans.variable} ${geistMono.variable} ${roboto.className}`}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <Navbar />
+          {children}
+        </ThemeProvider>
+      </body>
+    </html>
   );
 }
