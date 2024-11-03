@@ -53,22 +53,21 @@ const TopAiring: React.FC = () => {
       <h1 className="text-3xl font-bold mb-4 text-left text-blue-600 ml-12 mt-6">Top Airing Anime</h1>
 
       {loading && (
-  <div className="flex justify-center w-full p-4">
-    <div className="grid gap-8 w-full sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-      {/* Skeleton items */}
-      {[...Array(4)].map((_, index) => (
-        <div key={index} className="rounded-lg p-4 shadow-lg flex flex-col items-center space-y-4 w-52 mx-auto">
-          <Skeleton className="h-72 w-full rounded-lg" />
-          <div className="space-y-2 w-full">
-            <Skeleton className="h-4 w-full mx-auto" />
-            <Skeleton className="h-4 w-full mx-auto" />
+        <div className="flex justify-center w-full p-4">
+          <div className="grid gap-8 w-full sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {/* Skeleton items */}
+            {[...Array(4)].map((_, index) => (
+              <div key={index} className="rounded-lg p-4 shadow-lg flex flex-col items-center space-y-4 w-52 mx-auto">
+                <Skeleton className="h-72 w-full rounded-lg" />
+                <div className="space-y-2 w-full">
+                  <Skeleton className="h-4 w-full mx-auto" />
+                  <Skeleton className="h-4 w-full mx-auto" />
+                </div>
+              </div>
+            ))}
           </div>
         </div>
-      ))}
-    </div>
-  </div>
-)}
-
+      )}
 
       {!loading && animeList.length > 0 && (
         <div className="relative">
@@ -78,10 +77,7 @@ const TopAiring: React.FC = () => {
           >
             <span className="text-xl">&lt;</span>
           </button>
-          <div
-            className="overflow-hidden whitespace-nowrap"
-            ref={scrollRef}
-          >
+          <div className="overflow-hidden whitespace-nowrap" ref={scrollRef}>
             <div className="flex space-x-4 p-4">
               {animeList.map((anime) => (
                 <div key={anime.id} className="flex-shrink-0 w-48 relative rounded-lg overflow-hidden shadow bg-gray-100 dark:bg-gray-800">
