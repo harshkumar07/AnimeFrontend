@@ -137,7 +137,7 @@ const AnimeDetail: React.FC<{ params: { id: string } }> = ({ params }) => {
   
         {/* Video Player Section */}
         {selectedVideoUrl && (
-           <div className="mb-5" >
+           <div className="mb-5" > {/* 16:9 Aspect Ratio */}
             <video
               ref={videoRef}
               controls

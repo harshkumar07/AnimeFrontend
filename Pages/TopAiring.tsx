@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import Link from "next/link";
 import { Skeleton } from "@/components/ui/skeleton";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa"; // Import icons from react-icons
 
 interface Anime {
   id: string; // Make sure to include 'id' since you're using it for the key
@@ -49,7 +50,7 @@ const TopAiring: React.FC = () => {
 
   return (
     <div className="my-4 mt-20 text-white">
-      <h1 className="text-3xl font-bold mb-4 text-left text-blue-600 ml-12 mt-6">Top Airing Anime</h1>
+      <h1 className="text-3xl font-bold mb-4 text-left text-blue-600 ml-8 mt-6">Top Airing Anime</h1>
       {loading && (
         <div className="flex justify-center w-full p-4">
           <div className="grid gap-8 w-full sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
@@ -69,10 +70,10 @@ const TopAiring: React.FC = () => {
       {!loading && animeList.length > 0 && (
         <div className="relative">
           <button
-            className="absolute left-3 top-1/2 transform -translate-y-1/2 z-10 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition duration-200 w-10 h-10 flex items-center justify-center"
+            className="absolute left-3 top-1/2 transform -translate-y-1/2 z-10 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition duration-200 p-2 flex items-center justify-center"
             onClick={() => scrollCarousel('left')}
           >
-            <span className="text-xl">&lt;</span>
+            <FaChevronLeft className="text-xl" />
           </button>
           <div
             className="overflow-hidden whitespace-nowrap"
@@ -85,10 +86,10 @@ const TopAiring: React.FC = () => {
                     <img
                       src={anime.image}
                       alt={anime.title}
-                      className="w-full h-64 object-cover rounded-t-lg"
+                      className="w-full h-[250px] object-cover rounded-t-lg"
                       loading="lazy"
                     />
-                    <div className="p-4 h-16">
+                    <div className="p-2 h-[100px]">
                       <p className="text-black dark:text-white text-md font-semibold truncate">{anime.title}</p>
                       <p className="text-black dark:text-gray-400 text-sm truncate">{anime.genres.join(', ')}</p>
                     </div>
@@ -98,10 +99,10 @@ const TopAiring: React.FC = () => {
             </div>
           </div>
           <button
-            className="absolute right-3 top-1/2 transform -translate-y-1/2 z-10 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition duration-200 w-10 h-10 flex items-center justify-center"
+            className="absolute right-3 top-1/2 transform -translate-y-1/2 z-10 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition duration-200 p-2 flex items-center justify-center"
             onClick={() => scrollCarousel('right')}
           >
-            <span className="text-xl">&gt;</span>
+            <FaChevronRight className="text-xl" />
           </button>
         </div>
       )}
