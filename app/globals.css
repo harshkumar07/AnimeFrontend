@@ -5,6 +5,23 @@
 body {
   @apply font-sans; /* Use Tailwind's utility to set the font-family */
 }
+/* Custom scrollbar for the description */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px; /* Adjust width */
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #191919; /* Track background color */
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #181818; /* Scrollbar color */
+  border-radius: 10px; /* Rounded corners */
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: #1c1c1c; /* Scrollbar color on hover */
+}
 
 /* Define the light theme colors */
 @layer base {

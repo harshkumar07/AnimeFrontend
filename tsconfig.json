@@ -1,15 +1,19 @@
 {
   "compilerOptions": {
-    "target": "esnext",                     // Use esnext for modern JavaScript features
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "skipLibCheck": true,                   // Skip type checking of declaration files
-    "strict": true,                         // Enable all strict type-checking options
+    "target": "esnext", // Use esnext for modern JavaScript features
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "skipLibCheck": true, // Skip type checking of declaration files
+    "strict": true, // Enable all strict type-checking options
     "esModuleInterop": true,
-    "module": "esnext",                     // Keep esnext for Next.js
-    "moduleResolution": "node",             // Use node for module resolution
+    "module": "esnext", // Keep esnext for Next.js
+    "moduleResolution": "node", // Use node for module resolution
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve",                      // Correct JSX handling for Next.js
+    "jsx": "preserve", // Correct JSX handling for Next.js
     "incremental": true,
     "plugins": [
       {
@@ -17,14 +21,20 @@
       }
     ],
     "paths": {
-      "@/*": ["./*"]                        // Allows using '@' for absolute imports
-    }
+      "@/*": [
+        "./*"
+      ] // Allows using '@' for absolute imports
+    },
+    "allowJs": true,
+    "noEmit": true
   },
   "include": [
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    ".next/types/**/*.ts"                   // Include types from the Next.js build
+    ".next/types/**/*.ts" // Include types from the Next.js build
   ],
-  "exclude": ["node_modules"]               // Exclude node_modules from compilation
+  "exclude": [
+    "node_modules"
+  ] // Exclude node_modules from compilation
 }

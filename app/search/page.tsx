@@ -121,7 +121,7 @@ const Search: React.FC = () => {
         </button>
       </form>
 
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 mt-6">
         {loading ? (
           <div className="flex justify-center items-center col-span-full">
             <div className="rounded-lg p-4 shadow-lg flex flex-col items-center space-y-4 w-52 mx-auto">
@@ -137,7 +137,7 @@ const Search: React.FC = () => {
             <div 
               key={anime.id}
               onClick={() => navigateToAnimeDetail(anime.title)}
-              className="cursor-pointer bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded shadow-md transition duration-200 ease-in-out flex flex-col items-center"
+              className="cursor-pointer w-full overflow-hidden truncate bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded shadow-md transition duration-200 ease-in-out flex flex-col items-center"
             >
               <img 
                 src={anime.image} 
@@ -145,9 +145,13 @@ const Search: React.FC = () => {
                 className="w-full h-[260px] object-cover rounded-lg" 
               />
               <div className="flex flex-col items-center text-center p-2">
-                <p className="font-semibold text-sm sm:text-base md:text-lg truncate w-full overflow-hidden">{anime.title}</p>
-                <p className="text-xs sm:text-sm md:text-base"><strong>Release Date:</strong> {anime.releaseDate || "N/A"}</p>
-                <p className="text-xs sm:text-sm md:text-base"><strong>Sub/Dub:</strong> {anime.subOrDub === "sub" ? "Subbed" : "Dubbed"}</p>
+                <p className="font-semibold text-sm sm:text-base truncate w-full overflow-hidden px-2">
+                    {anime.title.length > 20 ? `${anime.title.slice(0, 17)}...` : anime.title}
+                </p>
+                <p className="text-xs sm:text-sm  truncate overflow-hidden"><strong>Release Date:</strong> {anime.releaseDate || "N/A"}</p>
+                <p className="text-xs sm:text-sm  truncate overflow-hidden"><strong>Sub/Dub:</strong> {anime.subOrDub === "sub" ? "Subbed" : "Dubbed"}</p>
+                
+              
               </div>
             </div>
           ))

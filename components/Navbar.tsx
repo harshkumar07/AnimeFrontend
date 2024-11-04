@@ -10,7 +10,7 @@ const Navbar: React.FC = () => {
         <div className="text-2xl font-bold text-black dark:text-white">
           <Link href="/">Anime</Link>
         </div>
-        <ul className="flex space-x-4">
+        <ul className="flex space-x-4 justify-center">
         
           <li>
             <Link href="/search" className="text-black dark:text-white hover:text-gray-600 dark:hover:text-gray-300 transition-colors duration-300">

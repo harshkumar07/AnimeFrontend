@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Skeleton } from "@/components/ui/skeleton";
 
 interface Anime {
-  id: string;
+  id: string; // Make sure to include 'id' since you're using it for the key
   title: string;
   image: string;
   url: string;
@@ -18,7 +18,7 @@ interface TopAiringResponse {
   results: Anime[];
 }
 
-export default function Home() {
+const TopAiring: React.FC = () => {
   const [animeList, setAnimeList] = useState<Anime[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -53,6 +53,7 @@ export default function Home() {
       {loading && (
         <div className="flex justify-center w-full p-4">
           <div className="grid gap-8 w-full sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {/* Skeleton items */}
             {[...Array(4)].map((_, index) => (
               <div key={index} className="rounded-lg p-4 shadow-lg flex flex-col items-center space-y-4 w-52 mx-auto">
                 <Skeleton className="h-72 w-full rounded-lg" />
@@ -106,4 +107,6 @@ export default function Home() {
       )}
     </div>
   );
-}
+};
+
+export default TopAiring;

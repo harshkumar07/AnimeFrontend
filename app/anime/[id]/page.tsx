@@ -42,6 +42,7 @@ const getEpisodeLink = (episodeId: string) =>
   `https://harshanime.vercel.app/anime/gogoanime/watch/${cleanString(episodeId)}`;
 
 const AnimeDetail: React.FC<{ params: { id: string } }> = ({ params }) => {
+    const [isExpanded, setIsExpanded] = useState(false);
   const id = cleanString(decodeURIComponent(params.id));
   const [animeInfo, setAnimeInfo] = useState<AnimeInfo | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
@@ -136,7 +137,7 @@ const AnimeDetail: React.FC<{ params: { id: string } }> = ({ params }) => {
   
         {/* Video Player Section */}
         {selectedVideoUrl && (
-          <div className="mb-5">
+           <div className="mb-5" >
             <video
               ref={videoRef}
               controls
@@ -185,26 +186,46 @@ const AnimeDetail: React.FC<{ params: { id: string } }> = ({ params }) => {
           ))}
         </div>
   
-        {/* Description Section */}
-        <div className="mt-5 flex flex-col md:flex-row">
-          <div className="w-full md:w-3/4 pr-4">
-            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-2">
-              {animeInfo.title}
-            </h2>
-            <h2 className="text-lg font-semibold">Description:</h2>
-            <p className="text-sm sm:text-base md:text-lg">{animeInfo.description}</p>
-          </div>
-          <div className="w-full md:w-1/4 flex justify-center items-center mt-4 md:mt-0">
-            <Image
-              src={animeInfo.image}
-              alt={animeInfo.title}
-              className="rounded-lg max-w-full h-auto"
-              width={300}
-              height={400}
-            />
-          </div>
-        </div>
-  
+      {/* Description Section */}
+      <div className="mt-5 sm:mt-10 flex flex-row">
+      {/* Text Section */}
+      <div className="w-[75%] pr-4">
+        <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-2">
+          {animeInfo.title}
+        </h2>
+        <h2 className="text-lg font-semibold">Description:</h2>
+        
+        {/* Description with Read More / Read Less toggle */}
+        <p
+          className={`text-sm sm:text-base md:text-lg ${
+            isExpanded ? "overflow-y-auto h-16 sm:h-44   custom-scrollbar" : "overflow-hidden max-h-16"
+          } pt-2 pb-4`}
+        >
+          {animeInfo.description}
+        </p>
+
+        {/* Read More / Read Less Button */}
+        <button
+          onClick={() => setIsExpanded(!isExpanded)} // Toggle between expanded and collapsed
+          className="text-blue-500 hover:underline"
+        >
+          {isExpanded ? "Read Less" : "Read More"}
+        </button>
+      </div>
+
+      {/* Image Section */}
+      <div className="w-[25%] flex justify-center items-center mt-4 md:mt-0">
+        <Image
+          src={animeInfo.image}
+          alt={animeInfo.title}
+          className="rounded-lg max-w-full h-auto"
+          width={300}
+          height={400}
+        />
+      </div>
+    </div>
+
+
         {/* Details Section */}
         <div className="mt-5 bg-gray-100 p-4 rounded-lg dark:bg-gray-800 text-sm sm:text-base md:text-lg">
           <p><strong>Other Name:</strong> {animeInfo.otherName || "N/A"}</p>
